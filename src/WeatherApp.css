@@ -26,3 +26,18 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.weather-container {
+  display: flex;
+  padding: 10px;
+}
+
+.weather-container h3 {
+  padding: 5px;
+}
+
+.weather-container span {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  color: blue;
+}

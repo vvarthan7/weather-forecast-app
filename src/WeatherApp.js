@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {
   Table,
   TableBody,
@@ -20,7 +18,7 @@ class WeatherApp extends Component {
 		this.state = { data: [] }
   }
 
-  componentDidMount(){
+  componentWillMount(){
     var city1 = 'bangalore';
     var url= 'http://api.openweathermap.org/data/2.5/forecast?appid=5568f2e23ed41863720d4663e025f91e&q='+city1+'&count=10';
     console.log(url);
@@ -34,7 +32,7 @@ class WeatherApp extends Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <MuiThemeProvider>
         <h1>REACT Weather App</h1>
         <Table className="table">
           <TableHeader displaySelectAll={false} adjustForCheckbox={false} className="table-header">

@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import PropTypes from 'prop-types';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 import './WeatherApp.css';
 
 class WeatherApp extends Component {
@@ -23,24 +34,37 @@ class WeatherApp extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Weather App</h1>
-        </header>
-        <h1>REACT WEATHER APP</h1>
-        {this.state.data.map((item, i) => {
-          return(
-            <div className="weather-container">
-            <h3 className="date">Date: <span>{item.dt_txt}</span></h3>
-            <h3 className="temp">Temperature: <span>{item.main.temp}</span></h3>
-            <h3 className="type">Weather Type: <span>{item.weather[0].main}</span></h3>
-            </div>
-          );
-        })}
-      </div>
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <h1>REACT Weather App</h1>
+        <Table className="table">
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false} className="table-header">
+            <TableRow>
+              <TableHeaderColumn>Date</TableHeaderColumn>
+              <TableHeaderColumn>Temperature</TableHeaderColumn>
+              <TableHeaderColumn>Weather Type</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody displayRowCheckbox={false}>
+            {this.state.data.map((item, i) => {
+              return(
+                <TableRow>
+                  <TableRowColumn><h3 className="date">Date: {item.dt_txt}</h3></TableRowColumn>
+                  <TableRowColumn><h3 className="temp">Temperature: {item.main.temp}</h3></TableRowColumn>
+                  <TableRowColumn><h3 className="type">Weather Type: {item.weather[0].main}</h3></TableRowColumn>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </MuiThemeProvider>
     );
   }
 }
+
+WeatherApp.propTypes = {
+  displaySelectAll: PropTypes.bool,
+  adjustForCheckbox: PropTypes.bool,
+  displayRowCheckbox: PropTypes.bool
+};
 
 export default WeatherApp;
